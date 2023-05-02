@@ -54,6 +54,22 @@ app.post("/students",async (req,res)=>{
     
  })
 
+ //update the students by their id
+app.patch("/students/:id",async(req,res)=>{
+    try{
+        const _id = req.params.id;
+        const updateStudents = await Student .findByIdAndUpdate(_id,req.body,{
+            new:true
+        })
+        res.send(updateStudents);
+
+    }catch(e){
+        res.status(400).send(e);
+
+    }
+})
+
+
 
 app.listen(port,()=>{
     console.log(`listening to port ${port}`); 
